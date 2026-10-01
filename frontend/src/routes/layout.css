@@ -1,0 +1,110 @@
+@import 'tailwindcss';
+
+/*
+ * Brand palette taken from src/lib/assets/logo.svg:
+ *   #0C60A9 blue (logo face) · #02569F deep blue (logo shadow) · #FAD403 yellow (logo mark)
+ * Tints and shades are mixed from those three so the whole UI stays on-brand.
+ * Readable pairings: white on ikea-blue (6.4:1), ikea-blue-deep on ikea-yellow (5.1:1).
+ */
+@theme {
+	/* Self-hosted via @fontsource-variable/noto-sans (imported in +layout.svelte). */
+	--font-sans: 'Noto Sans Variable', 'Noto Sans', ui-sans-serif, system-ui, sans-serif;
+
+	--color-ikea-blue: #0c60a9;
+	--color-ikea-blue-deep: #02569f;
+	--color-ikea-blue-50: color-mix(in oklab, #0c60a9 6%, white);
+	--color-ikea-blue-100: color-mix(in oklab, #0c60a9 14%, white);
+	--color-ikea-blue-200: color-mix(in oklab, #0c60a9 30%, white);
+	--color-ikea-blue-900: color-mix(in oklab, #02569f 60%, black);
+
+	--color-ikea-yellow: #fad403;
+	--color-ikea-yellow-50: color-mix(in oklab, #fad403 10%, white);
+	--color-ikea-yellow-100: color-mix(in oklab, #fad403 25%, white);
+	--color-ikea-yellow-600: color-mix(in oklab, #fad403 85%, black);
+}
+
+/*
+ * Interaction states for anything inside a `.nav-item` (see BottomNav.svelte).
+ * `data-preview` forces a state so the component showcase can display it statically.
+ * Declaration order is precedence order: pressed beats active beats hover.
+ */
+@custom-variant nav-hover {
+	@media (hover: hover) {
+		:where(.nav-item):hover & {
+			@slot;
+		}
+	}
+	:where(.nav-item):is(:focus-visible, [data-preview='hover']) & {
+		@slot;
+	}
+}
+@custom-variant nav-active {
+	:where(.nav-item)[aria-current='page'] & {
+		@slot;
+	}
+}
+@custom-variant nav-pressed {
+	:where(.nav-item):is(:active, [data-preview='pressed']) & {
+		@slot;
+	}
+}
+
+/*
+ * Theme: semantic tokens that components use instead of raw palette colors.
+ * Each is a light-dark() pair, so the active `color-scheme` picks the value:
+ * the system preference by default, or <html data-theme="light|dark"> when the
+ * user overrides it (see $lib/theme.ts and the inline script in app.html).
+ * Brand colors (ikea-blue buttons, ikea-yellow highlights) stay the same in both modes.
+ */
+:root {
+	color-scheme: light dark;
+	--canvas: light-dark(var(--color-ikea-blue-50), #0b1526);
+	--surface: light-dark(#ffffff, #14233a);
+	--ink: light-dark(var(--color-ikea-blue-900), #e6eef8);
+	--line: light-dark(var(--color-ikea-blue-100), #24395a);
+	--line-strong: light-dark(var(--color-ikea-blue-200), #3a5680);
+	--tint: light-dark(var(--color-ikea-blue-100), #1d3252);
+	--tint-strong: light-dark(var(--color-ikea-blue-200), #29466f);
+	/* Blue text and outlines: brand blue on light, lifted to stay readable (8:1) on dark. */
+	--accent: light-dark(var(--color-ikea-blue), #8cc0f5);
+	--highlight: light-dark(var(--color-ikea-yellow-100), color-mix(in oklab, #fad403 18%, #14233a));
+}
+:root[data-theme='light'] {
+	color-scheme: light;
+}
+:root[data-theme='dark'] {
+	color-scheme: dark;
+}
+
+@theme inline {
+	--color-canvas: var(--canvas);
+	--color-surface: var(--surface);
+	--color-ink: var(--ink);
+	--color-line: var(--line);
+	--color-line-strong: var(--line-strong);
+	--color-tint: var(--tint);
+	--color-tint-strong: var(--tint-strong);
+	--color-accent: var(--accent);
+	--color-highlight: var(--highlight);
+}
+
+@layer base {
+	:root {
+		accent-color: var(--accent);
+	}
+
+	body {
+		@apply bg-canvas text-ink antialiased;
+	}
+
+	:focus-visible {
+		@apply outline-2 outline-offset-2 outline-ikea-yellow;
+	}
+}
+
+/* BottomSheet entrance. */
+@keyframes sheet-up {
+	from {
+		transform: translateY(100%);
+	}
+}
