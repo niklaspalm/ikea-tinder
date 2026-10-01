@@ -1,0 +1,183 @@
+{
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"page_title": "{page} · IKEA Tinder",
+	"home_page_title": "Swipe the newest IKEA products",
+	"home_heading": "Hej!",
+	"home_intro": "Swipe through the newest IKEA products. Pick your country to get started.",
+	"product_card_label": "{name}, {description}",
+	"product_description": "{typeName}, {designText}",
+	"product_price_unavailable": "Price not available",
+	"product_like": "Like {name}",
+	"product_dislike": "Dislike {name}",
+	"product_more_info": "More info about {name}",
+	"product_view_on_ikea": "View on IKEA.com",
+	"product_opens_new_tab": "(opens in a new tab)",
+	"product_images_label": "Images of {name}",
+	"product_rating": "Rated {rating} out of 5",
+	"product_review_count": [
+		{
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
+			"match": {
+				"countPlural=one": "{count} review",
+				"countPlural=other": "{count} reviews"
+			}
+		}
+	],
+	"product_details_heading": "Details",
+	"product_article_number": "Article number",
+	"product_size": "Size",
+	"product_colors": "Colors",
+	"product_category": "Category",
+	"product_variants": "Variants",
+	"product_variant_count": [
+		{
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
+			"match": {
+				"countPlural=one": "Available in {count} variant",
+				"countPlural=other": "Available in {count} variants"
+			}
+		}
+	],
+	"match_view_on_ikea": "View {name} on IKEA.com (opens in a new tab)",
+	"match_remove": "Remove {name} from matches",
+	"match_search_label": "Search matches",
+	"match_search_placeholder": "Search by name or type",
+	"match_search_clear": "Clear search",
+	"match_search_results": [
+		{
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
+			"match": {
+				"countPlural=one": "{count} match",
+				"countPlural=other": "{count} matches"
+			}
+		}
+	],
+	"match_search_no_results": "No matches for “{query}”",
+	"nav_label": "Main",
+	"nav_swipe": "Swipe",
+	"nav_matches": "Matches",
+	"nav_about": "About",
+	"country_selector_label": "Choose your country",
+	"theme_label": "Theme",
+	"theme_system": "System",
+	"theme_light": "Light",
+	"theme_dark": "Dark",
+	"showcase_page_title": "Components",
+	"showcase_heading": "Component showcase",
+	"showcase_intro": "Every UI building block in isolation, with dummy data.",
+	"showcase_colors_heading": "Colors",
+	"showcase_brand_colors": "Brand palette (same in both themes)",
+	"showcase_theme_tokens": "Theme tokens (switch with the theme)",
+	"showcase_product_card_heading": "Product card",
+	"showcase_product_card_intro": "The dummy data is a random product from a live product response.",
+	"showcase_regenerate_label": "Pick another product:",
+	"showcase_action_prompt": "Press a button on a card",
+	"showcase_action_liked": "Liked: {name}",
+	"showcase_action_disliked": "Disliked: {name}",
+	"showcase_action_more_info": "More info: {name}",
+	"showcase_variant_default": "Default",
+	"showcase_variant_edge_case": "Long name, no price",
+	"showcase_nav_heading": "Bottom navigation",
+	"showcase_nav_intro": "Each row shows the Matches item in one state.",
+	"showcase_state_normal": "Normal",
+	"showcase_state_hover": "Hover / focus",
+	"showcase_state_active": "Active",
+	"showcase_state_pressed": "Pressed",
+	"showcase_matches_heading": "Match list",
+	"showcase_matches_intro": "Type to filter; remove takes a match out of the list.",
+	"showcase_matches_reset": "Reset list",
+	"showcase_icons_heading": "Icons",
+	"showcase_icons_intro": "Outlined by default; heart, flame and info-circle also come solid.",
+	"showcase_blocks_heading": "Product building blocks",
+	"showcase_blocks_intro": "Shared by the product card, the product view and the match list.",
+	"showcase_block_title": "Title",
+	"showcase_block_price": "Price",
+	"showcase_block_rating": "Rating",
+	"showcase_price_regular": "Regular",
+	"showcase_price_reduced": "Reduced",
+	"showcase_price_unavailable": "Unavailable",
+	"showcase_country_heading": "Country selector",
+	"showcase_country_selected": "Selected market: {market}",
+	"showcase_country_none": "No country selected yet",
+	"showcase_product_view_heading": "Product view",
+	"showcase_product_view_intro": "Everything behind “More info”, shown with the most detailed sample product.",
+	"home_start": "Start swiping",
+	"swipe_page_title": "Swipe",
+	"swipe_heading": "New at IKEA",
+	"swipe_progress": "{seen} of {total} seen",
+	"swipe_loading": "Loading products…",
+	"swipe_stamp_like": "LIKE",
+	"swipe_stamp_nope": "NOPE",
+	"swipe_announce_liked": "Liked {name}",
+	"swipe_announce_disliked": "Passed on {name}",
+	"swipe_done_heading": "That's everything for now!",
+	"swipe_done_body": [
+		{
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
+			"match": {
+				"countPlural=one": "You've been through the {count} newest product.",
+				"countPlural=other": "You've been through all {count} newest products."
+			}
+		}
+	],
+	"swipe_done_matches": "See your matches",
+	"swipe_done_restart": "Show disliked products again",
+	"swipe_error_heading": "Couldn't reach IKEA",
+	"swipe_error_body": "The products could not be loaded right now.",
+	"swipe_retry": "Try again",
+	"swipe_details_label": "Details for {name}",
+	"product_in_matches": "In your matches",
+	"product_action_like": "Like",
+	"product_action_dislike": "Dislike",
+	"product_action_unmatch": "Remove from matches",
+	"match_view_details": "Show details for {name}",
+	"matches_page_title": "Matches",
+	"matches_heading": "Your matches",
+	"matches_empty": "No matches yet. Swipe right on something you love!",
+	"matches_empty_cta": "Start swiping",
+	"about_page_title": "About",
+	"about_heading": "About IKEA Tinder",
+	"about_body": "Swipe through the 200 newest products from IKEA: right to like, left to pass. Your likes are saved on this device only.",
+	"about_disclaimer": "A hobby project, not affiliated with IKEA. Product data and images come from IKEA.",
+	"about_settings_heading": "Settings",
+	"about_theme_heading": "Appearance",
+	"about_country_save": "Change country",
+	"header_change_country": "Country: {country}. Change country",
+	"dialog_close": "Close",
+	"showcase_deck_heading": "Swipe deck",
+	"showcase_deck_intro": "Drag a card or use its buttons. Decisions here are not saved.",
+	"showcase_deck_empty": "All sample cards swiped.",
+	"about_reset_heading": "Likes and dislikes",
+	"about_reset_body": "Start over by removing every like and dislike saved on this device, in all countries.",
+	"about_reset_button": "Reset likes and dislikes",
+	"about_reset_confirm": "Remove all likes and dislikes? This can't be undone.",
+	"about_reset_confirm_yes": "Yes, reset",
+	"about_reset_cancel": "Cancel",
+	"about_reset_done": "All likes and dislikes were removed.",
+	"language_label": "Language",
+	"about_language_heading": "Language"
+}

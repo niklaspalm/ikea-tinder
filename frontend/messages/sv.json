@@ -1,0 +1,183 @@
+{
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"page_title": "{page} · IKEA Tinder",
+	"home_page_title": "Swipa bland IKEA:s nyheter",
+	"home_heading": "Hej!",
+	"home_intro": "Swipa bland IKEA:s senaste produkter. Välj ditt land för att börja.",
+	"product_card_label": "{name}, {description}",
+	"product_description": "{typeName}, {designText}",
+	"product_price_unavailable": "Pris saknas",
+	"product_like": "Gilla {name}",
+	"product_dislike": "Ogilla {name}",
+	"product_more_info": "Mer information om {name}",
+	"product_view_on_ikea": "Visa på IKEA.com",
+	"product_opens_new_tab": "(öppnas i en ny flik)",
+	"product_images_label": "Bilder på {name}",
+	"product_rating": "Betyg {rating} av 5",
+	"product_review_count": [
+		{
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
+			"match": {
+				"countPlural=one": "{count} recension",
+				"countPlural=other": "{count} recensioner"
+			}
+		}
+	],
+	"product_details_heading": "Detaljer",
+	"product_article_number": "Artikelnummer",
+	"product_size": "Storlek",
+	"product_colors": "Färger",
+	"product_category": "Kategori",
+	"product_variants": "Varianter",
+	"product_variant_count": [
+		{
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
+			"match": {
+				"countPlural=one": "Finns i {count} variant",
+				"countPlural=other": "Finns i {count} varianter"
+			}
+		}
+	],
+	"match_view_on_ikea": "Visa {name} på IKEA.com (öppnas i en ny flik)",
+	"match_remove": "Ta bort {name} från matchningar",
+	"match_search_label": "Sök bland matchningar",
+	"match_search_placeholder": "Sök på namn eller typ",
+	"match_search_clear": "Rensa sökningen",
+	"match_search_results": [
+		{
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
+			"match": {
+				"countPlural=one": "{count} matchning",
+				"countPlural=other": "{count} matchningar"
+			}
+		}
+	],
+	"match_search_no_results": "Inga matchningar för ”{query}”",
+	"nav_label": "Huvudmeny",
+	"nav_swipe": "Swipa",
+	"nav_matches": "Matchningar",
+	"nav_about": "Om",
+	"country_selector_label": "Välj ditt land",
+	"theme_label": "Tema",
+	"theme_system": "System",
+	"theme_light": "Ljust",
+	"theme_dark": "Mörkt",
+	"showcase_page_title": "Komponenter",
+	"showcase_heading": "Komponentkatalog",
+	"showcase_intro": "Alla byggstenar i gränssnittet var för sig, med exempeldata.",
+	"showcase_colors_heading": "Färger",
+	"showcase_brand_colors": "Varumärkespalett (samma i båda teman)",
+	"showcase_theme_tokens": "Tematokens (växlar med temat)",
+	"showcase_product_card_heading": "Produktkort",
+	"showcase_product_card_intro": "Exempeldatan är en slumpad produkt från ett riktigt produktsvar.",
+	"showcase_regenerate_label": "Välj en annan produkt:",
+	"showcase_action_prompt": "Tryck på en knapp på ett kort",
+	"showcase_action_liked": "Gillade: {name}",
+	"showcase_action_disliked": "Ogillade: {name}",
+	"showcase_action_more_info": "Mer info: {name}",
+	"showcase_variant_default": "Standard",
+	"showcase_variant_edge_case": "Långt namn, inget pris",
+	"showcase_nav_heading": "Bottennavigering",
+	"showcase_nav_intro": "Varje rad visar Matchningar i ett visst tillstånd.",
+	"showcase_state_normal": "Normal",
+	"showcase_state_hover": "Hovring / fokus",
+	"showcase_state_active": "Aktiv",
+	"showcase_state_pressed": "Nedtryckt",
+	"showcase_matches_heading": "Matchningslista",
+	"showcase_matches_intro": "Skriv för att filtrera; ta bort tar bort en matchning från listan.",
+	"showcase_matches_reset": "Återställ listan",
+	"showcase_icons_heading": "Ikoner",
+	"showcase_icons_intro": "Konturer som standard; hjärta, låga och info-cirkel finns även ifyllda.",
+	"showcase_blocks_heading": "Produktbyggstenar",
+	"showcase_blocks_intro": "Delas av produktkortet, produktvyn och matchningslistan.",
+	"showcase_block_title": "Rubrik",
+	"showcase_block_price": "Pris",
+	"showcase_block_rating": "Betyg",
+	"showcase_price_regular": "Ordinarie",
+	"showcase_price_reduced": "Sänkt",
+	"showcase_price_unavailable": "Saknas",
+	"showcase_country_heading": "Landsväljare",
+	"showcase_country_selected": "Vald marknad: {market}",
+	"showcase_country_none": "Inget land valt än",
+	"showcase_product_view_heading": "Produktvy",
+	"showcase_product_view_intro": "Allt bakom ”Mer info”, visat med den mest detaljerade exempelprodukten.",
+	"home_start": "Börja swipa",
+	"swipe_page_title": "Swipa",
+	"swipe_heading": "Nytt på IKEA",
+	"swipe_progress": "{seen} av {total} visade",
+	"swipe_loading": "Laddar produkter…",
+	"swipe_stamp_like": "JA TACK",
+	"swipe_stamp_nope": "NEJ TACK",
+	"swipe_announce_liked": "Gillade {name}",
+	"swipe_announce_disliked": "Hoppade över {name}",
+	"swipe_done_heading": "Det var allt för nu!",
+	"swipe_done_body": [
+		{
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
+			"match": {
+				"countPlural=one": "Du har gått igenom den {count} nyaste produkten.",
+				"countPlural=other": "Du har gått igenom alla {count} nyaste produkter."
+			}
+		}
+	],
+	"swipe_done_matches": "Se dina matchningar",
+	"swipe_done_restart": "Visa ogillade produkter igen",
+	"swipe_error_heading": "Kunde inte nå IKEA",
+	"swipe_error_body": "Produkterna kunde inte laddas just nu.",
+	"swipe_retry": "Försök igen",
+	"swipe_details_label": "Detaljer för {name}",
+	"product_in_matches": "Bland dina matchningar",
+	"product_action_like": "Gilla",
+	"product_action_dislike": "Ogilla",
+	"product_action_unmatch": "Ta bort från matchningar",
+	"match_view_details": "Visa detaljer för {name}",
+	"matches_page_title": "Matchningar",
+	"matches_heading": "Dina matchningar",
+	"matches_empty": "Inga matchningar än. Swipa höger på något du gillar!",
+	"matches_empty_cta": "Börja swipa",
+	"about_page_title": "Om",
+	"about_heading": "Om IKEA Tinder",
+	"about_body": "Swipa bland IKEA:s 200 nyaste produkter: höger för att gilla, vänster för att hoppa över. Dina val sparas bara på den här enheten.",
+	"about_disclaimer": "Ett hobbyprojekt utan koppling till IKEA. Produktdata och bilder kommer från IKEA.",
+	"about_settings_heading": "Inställningar",
+	"about_theme_heading": "Utseende",
+	"about_country_save": "Byt land",
+	"header_change_country": "Land: {country}. Byt land",
+	"dialog_close": "Stäng",
+	"showcase_deck_heading": "Swipekortlek",
+	"showcase_deck_intro": "Dra ett kort eller använd knapparna. Val här sparas inte.",
+	"showcase_deck_empty": "Alla exempelkort är swipade.",
+	"about_reset_heading": "Gillade och ogillade",
+	"about_reset_body": "Börja om genom att ta bort alla gillade och ogillade produkter på den här enheten, i alla länder.",
+	"about_reset_button": "Nollställ gillade och ogillade",
+	"about_reset_confirm": "Ta bort alla gillade och ogillade? Det går inte att ångra.",
+	"about_reset_confirm_yes": "Ja, nollställ",
+	"about_reset_cancel": "Avbryt",
+	"about_reset_done": "Alla gillade och ogillade har tagits bort.",
+	"language_label": "Språk",
+	"about_language_heading": "Språk"
+}
