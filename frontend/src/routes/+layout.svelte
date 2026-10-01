@@ -52,7 +52,7 @@
 		</div>
 	</header>
 
-	<main class="mx-auto flex w-full max-w-md flex-1 flex-col px-4 py-4">
+	<main class="mx-auto flex w-full max-w-md flex-1 flex-col px-4 py-4 short:py-2">
 		{@render children()}
 	</main>
 

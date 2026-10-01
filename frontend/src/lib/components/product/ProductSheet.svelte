@@ -22,7 +22,7 @@
 	aria-label={label}
 >
 	{@render media()}
-	<div class="space-y-4 border-t border-line p-5">
+	<div class="space-y-4 border-t border-line p-5 short:space-y-3 short:p-4">
 		{@render children()}
 	</div>
 	{@render footer?.()}

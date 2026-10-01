@@ -50,7 +50,7 @@
 </script>
 
 <div class="flex flex-1 flex-col">
-	<div class="mb-3 flex items-baseline justify-between gap-3">
+	<div class="mb-3 flex items-baseline short:mb-2 justify-between gap-3">
 		<h1 class="text-xl font-bold text-accent">{m.swipe_heading()}</h1>
 		{#if decisions.loaded && products}
 			<p class="text-sm text-ink/75">{m.swipe_progress({ seen: total - remaining.length, total })}</p>
@@ -74,12 +74,12 @@
 			</button>
 		</section>
 	{:else if !decisions.loaded || !products}
-		<div class="relative min-h-[28rem] flex-1" aria-busy="true">
+		<div class="relative min-h-[28rem] flex-1 short:min-h-[19rem]" aria-busy="true">
 			<div class="absolute inset-0 animate-pulse rounded-3xl bg-surface ring-1 ring-line motion-reduce:animate-none"></div>
 			<p class="sr-only">{m.swipe_loading()}</p>
 		</div>
 	{:else if remaining.length > 0}
-		<div class="relative min-h-[28rem] flex-1">
+		<div class="relative min-h-[28rem] flex-1 short:min-h-[19rem]">
 			<SwipeDeck
 				bind:this={deck}
 				products={remaining}

@@ -28,6 +28,12 @@
  * `data-preview` forces a state so the component showcase can display it statically.
  * Declaration order is precedence order: pressed beats active beats hover.
  */
+/*
+ * Short viewports (iPhone SE and similar, especially with browser toolbars showing):
+ * the swipe card compacts so its buttons stay on screen above the bottom nav.
+ */
+@custom-variant short (@media (max-height: 700px));
+
 @custom-variant nav-hover {
 	@media (hover: hover) {
 		:where(.nav-item):hover & {

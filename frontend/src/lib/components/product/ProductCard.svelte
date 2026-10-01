@@ -33,30 +33,30 @@
 	</div>
 
 	{#snippet footer()}
-		<div class="flex items-center justify-center gap-6 px-5 pb-5">
+		<div class="flex items-center justify-center gap-6 px-5 pb-5 short:gap-4 short:pb-3">
 			<button
 				type="button"
-				class="{ACTION} size-16 bg-surface text-accent ring-2 ring-line-strong hover:ring-accent"
+				class="{ACTION} size-16 bg-surface text-accent short:size-12 ring-2 ring-line-strong hover:ring-accent"
 				aria-label={m.product_dislike({ name: product.name })}
 				onclick={() => ondislike?.(product)}
 			>
-				<Icon name="close" strokeWidth={3} class="size-8" />
+				<Icon name="close" strokeWidth={3} class="size-8 short:size-6" />
 			</button>
 			<button
 				type="button"
-				class="{ACTION} size-11 bg-ikea-blue text-white hover:bg-ikea-blue-deep"
+				class="{ACTION} size-11 bg-ikea-blue short:size-9 text-white hover:bg-ikea-blue-deep"
 				aria-label={m.product_more_info({ name: product.name })}
 				onclick={() => onmoreinfo?.(product)}
 			>
-				<Icon name="info" />
+				<Icon name="info" class="size-6 short:size-5" />
 			</button>
 			<button
 				type="button"
-				class="{ACTION} size-16 bg-ikea-yellow text-ikea-blue-deep hover:bg-ikea-yellow-600"
+				class="{ACTION} size-16 bg-ikea-yellow short:size-12 text-ikea-blue-deep hover:bg-ikea-yellow-600"
 				aria-label={m.product_like({ name: product.name })}
 				onclick={() => onlike?.(product)}
 			>
-				<Icon name="heart" solid class="size-8" />
+				<Icon name="heart" solid class="size-8 short:size-6" />
 			</button>
 		</div>
 	{/snippet}
