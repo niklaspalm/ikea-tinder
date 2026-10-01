@@ -27,13 +27,21 @@
 
 		const root = document.documentElement;
 		root.dataset.navDirection = navIndex(to) < navIndex(from) ? 'back' : 'forward';
+		const pageTop = () => document.querySelector('main')?.getBoundingClientRect().top ?? 0;
+		const oldTop = pageTop();
 
 		return new Promise((resolve) => {
 			const transition = document.startViewTransition(async () => {
 				resolve();
 				await navigation.complete;
+				// The new page starts scrolled to the top. Keep the outgoing page where the user
+				// was looking (see --page-old-y in layout.css) so the slide stays horizontal.
+				root.style.setProperty('--page-old-y', `${oldTop - pageTop()}px`);
 			});
-			transition.finished.finally(() => delete root.dataset.navDirection);
+			transition.finished.finally(() => {
+				delete root.dataset.navDirection;
+				root.style.removeProperty('--page-old-y');
+			});
 		});
 	});
 

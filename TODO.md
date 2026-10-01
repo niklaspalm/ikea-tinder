@@ -51,3 +51,4 @@ Frontend
 [x] In product preview mode, it would be nice to be able to click the product images and make them bigger, zoomable maybe
 [x] Implement an undo button for users that dislike something they actually liked, should only be possible for the latest dislike
 [x] Swiping on iPhone is sometimes a bit off. It is like the whole page is "dragged". Try to figure out a fix
+[x] After scrolling on the about page and switching to any other view, the slide animation between pages not just horizontal, it is also vertical, it should only be horizontal

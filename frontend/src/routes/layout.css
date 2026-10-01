@@ -158,9 +158,17 @@
  * edge, side by side, in the direction of the nav order. Header and nav are separate
  * snapshots that stay put. Browsers without the API just switch pages instantly.
  */
+/*
+ * --page-old-y (set in +layout.svelte) holds the outgoing page where it was on screen:
+ * after scrolling it sits above the new page, which always starts at the top. Both
+ * keyframes of the outgoing page use the same y, so the motion is purely horizontal.
+ */
 @keyframes carousel-out-left {
+	from {
+		transform: translate(0, var(--page-old-y, 0px));
+	}
 	to {
-		transform: translateX(-100%);
+		transform: translate(-100%, var(--page-old-y, 0px));
 	}
 }
 @keyframes carousel-in-from-right {
@@ -169,8 +177,11 @@
 	}
 }
 @keyframes carousel-out-right {
+	from {
+		transform: translate(0, var(--page-old-y, 0px));
+	}
 	to {
-		transform: translateX(100%);
+		transform: translate(100%, var(--page-old-y, 0px));
 	}
 }
 @keyframes carousel-in-from-left {
@@ -183,9 +194,12 @@
 ::view-transition-image-pair(page) {
 	overflow: clip;
 }
+/*
+ * No geometry animation: by default the browser morphs the page area's position and size
+ * from the old page to the new one, which after scrolling turns into a vertical slide.
+ */
 ::view-transition-group(page) {
-	animation-duration: 380ms;
-	animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	animation: none;
 }
 /* Both pages move together with the same easing, so they stay edge to edge. */
 ::view-transition-old(page),
