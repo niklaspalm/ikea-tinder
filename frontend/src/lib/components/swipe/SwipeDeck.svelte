@@ -56,27 +56,43 @@
 		);
 	}
 
+	/** Movement before a press becomes a drag; below it, the press stays a tap/click. */
+	const DRAG_THRESHOLD = 8;
+
+	/** A pointer is down on the card but hasn't moved far enough to count as a drag yet. */
+	let pressed = false;
+
 	const reset = () => {
+		pressed = false;
 		dragging = false;
 		offsetX = 0;
 		offsetY = 0;
 	};
 
 	const onpointerdown = (event: PointerEvent) => {
-		// Buttons on the card keep working; only the card surface drags.
-		if (leaving || (event.target as Element).closest('button, a')) return;
-		dragging = true;
+		// Action buttons keep working as buttons. Image tap zones opt in with
+		// data-swipe-through: a drag may start on them, a plain tap still clicks them.
+		if (leaving || (event.target as Element).closest('button:not([data-swipe-through]), a')) return;
+		pressed = true;
 		dragStart = { x: event.clientX, y: event.clientY, time: performance.now() };
-		(event.currentTarget as HTMLElement).setPointerCapture(event.pointerId);
 	};
 
 	const onpointermove = (event: PointerEvent) => {
-		if (!dragging) return;
-		offsetX = event.clientX - dragStart.x;
-		offsetY = (event.clientY - dragStart.y) * 0.3;
+		if (!pressed && !dragging) return;
+		const dx = event.clientX - dragStart.x;
+		const dy = event.clientY - dragStart.y;
+		if (!dragging) {
+			if (Math.hypot(dx, dy) < DRAG_THRESHOLD) return;
+			// Capture only once it's a real drag, so the release doesn't click a tap zone.
+			dragging = true;
+			(event.currentTarget as HTMLElement).setPointerCapture(event.pointerId);
+		}
+		offsetX = dx;
+		offsetY = dy * 0.3;
 	};
 
 	const onpointerup = () => {
+		pressed = false;
 		if (!dragging) return;
 		const velocity = offsetX / Math.max(performance.now() - dragStart.time, 1);
 		const isFlick = Math.abs(velocity) > FLICK_VELOCITY && Math.abs(offsetX) > 30;

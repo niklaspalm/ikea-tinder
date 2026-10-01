@@ -3,7 +3,7 @@
 	import Icon from '$lib/components/Icon.svelte';
 	import { m } from '$lib/paraglide/messages';
 	import { describeProduct } from '$lib/product';
-	import ProductImage from './ProductImage.svelte';
+	import ProductImageStepper from './ProductImageStepper.svelte';
 	import ProductPrice from './ProductPrice.svelte';
 	import ProductSheet from './ProductSheet.svelte';
 	import ProductTitle from './ProductTitle.svelte';
@@ -24,11 +24,7 @@
 
 <ProductSheet {fill} label={m.product_card_label({ name: product.name, description: describeProduct(product) })}>
 	{#snippet media()}
-		<ProductImage
-			src={product.imageUrl}
-			alt={product.imageAlt}
-			class={['w-full p-6', fill ? 'min-h-0 flex-1' : 'aspect-square']}
-		/>
+		<ProductImageStepper {product} {fill} />
 	{/snippet}
 
 	<div>

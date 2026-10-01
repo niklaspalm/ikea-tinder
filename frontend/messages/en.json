@@ -179,5 +179,8 @@
 	"about_reset_cancel": "Cancel",
 	"about_reset_done": "All likes and dislikes were removed.",
 	"language_label": "Language",
-	"about_language_heading": "Language"
+	"about_language_heading": "Language",
+	"product_image_previous": "Previous image",
+	"product_image_next": "Next image",
+	"product_image_position": "Image {index} of {count}"
 }

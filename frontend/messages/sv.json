@@ -179,5 +179,8 @@
 	"about_reset_cancel": "Avbryt",
 	"about_reset_done": "Alla gillade och ogillade har tagits bort.",
 	"language_label": "Språk",
-	"about_language_heading": "Språk"
+	"about_language_heading": "Språk",
+	"product_image_previous": "Föregående bild",
+	"product_image_next": "Nästa bild",
+	"product_image_position": "Bild {index} av {count}"
 }

@@ -179,5 +179,8 @@
 	"about_reset_cancel": "Abbrechen",
 	"about_reset_done": "Deine Auswahl wurde zurückgesetzt.",
 	"language_label": "Sprache",
-	"about_language_heading": "Sprache"
+	"about_language_heading": "Sprache",
+	"product_image_previous": "Vorheriges Bild",
+	"product_image_next": "Nächstes Bild",
+	"product_image_position": "Bild {index} von {count}"
 }

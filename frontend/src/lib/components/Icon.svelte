@@ -10,7 +10,9 @@
 		| 'star'
 		| 'sun'
 		| 'moon'
-		| 'monitor';
+		| 'monitor'
+		| 'chevron-left'
+		| 'chevron-right';
 </script>
 
 <script lang="ts">
@@ -72,5 +74,9 @@
 	{:else if name === 'monitor'}
 		<rect x="3" y="4" width="18" height="12" rx="2" />
 		<path d="M8 20h8M12 16v4" />
+	{:else if name === 'chevron-left'}
+		<path d="M15 5l-7 7 7 7" />
+	{:else if name === 'chevron-right'}
+		<path d="M9 5l7 7-7 7" />
 	{/if}
 </svg>

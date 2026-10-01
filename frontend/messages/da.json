@@ -179,5 +179,8 @@
 	"about_reset_cancel": "Annuller",
 	"about_reset_done": "Alle dine valg er fjernet.",
 	"language_label": "Sprog",
-	"about_language_heading": "Sprog"
+	"about_language_heading": "Sprog",
+	"product_image_previous": "Forrige billede",
+	"product_image_next": "Næste billede",
+	"product_image_position": "Billede {index} af {count}"
 }
