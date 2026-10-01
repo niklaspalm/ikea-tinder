@@ -226,3 +226,12 @@
 		animation: none !important;
 	}
 }
+
+/*
+ * While the swipe deck is on screen, the page itself never scrolls or rubber-bands:
+ * on iOS Safari that elastic bounce made the whole page move along with a card swipe.
+ */
+html:has([data-swipe-deck]),
+html:has([data-swipe-deck]) body {
+	overscroll-behavior: none;
+}

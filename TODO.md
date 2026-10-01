@@ -49,3 +49,5 @@ Frontend
 [x] Create a loading screen when the api is slow to respond
 [x] Product preview UI - The close button could be placed in a better position, right now it is pushing down content
 [x] In product preview mode, it would be nice to be able to click the product images and make them bigger, zoomable maybe
+[x] Implement an undo button for users that dislike something they actually liked, should only be possible for the latest dislike
+[x] Swiping on iPhone is sometimes a bit off. It is like the whole page is "dragged". Try to figure out a fix

@@ -188,5 +188,8 @@
 	"showcase_loading_intro": "Vises, mens IKEA svarer. Den beroligende besked dukker op efter 5 sekunder.",
 	"product_image_enlarge": "Forstør billede {index} af {count}",
 	"lightbox_zoom_in": "Zoom ind",
-	"lightbox_zoom_out": "Zoom ud"
+	"lightbox_zoom_out": "Zoom ud",
+	"swipe_undo": "Fortryd",
+	"swipe_undo_label": "Fortryd fravalget af {name}",
+	"swipe_announce_undone": "Hentede {name} tilbage"
 }

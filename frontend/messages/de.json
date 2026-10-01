@@ -188,5 +188,8 @@
 	"showcase_loading_intro": "Wird angezeigt, während IKEA antwortet. Der beruhigende Hinweis erscheint nach 5 Sekunden.",
 	"product_image_enlarge": "Bild {index} von {count} vergrößern",
 	"lightbox_zoom_in": "Vergrößern",
-	"lightbox_zoom_out": "Verkleinern"
+	"lightbox_zoom_out": "Verkleinern",
+	"swipe_undo": "Rückgängig",
+	"swipe_undo_label": "Ablehnung von {name} rückgängig machen",
+	"swipe_announce_undone": "{name} zurückgeholt"
 }

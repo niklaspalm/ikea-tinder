@@ -46,6 +46,11 @@ const readDecisions = (market: string): Record<string, Decision> => {
 export const createDecisionStore = () => {
 	let market = $state<string | null>(null);
 	let decisions = $state<Record<string, Decision>>({});
+	/**
+	 * The most recent swipe if it was a dislike: the only decision Undo may reverse.
+	 * Session-only on purpose; after a reload there is nothing to undo.
+	 */
+	let undoable = $state<Product | null>(null);
 
 	const matches = $derived(
 		Object.values(decisions)
@@ -74,16 +79,32 @@ export const createDecisionStore = () => {
 		load(marketKey: string) {
 			market = marketKey;
 			decisions = readDecisions(marketKey);
+			undoable = null;
+		},
+		/** The product whose dislike can be undone, if the latest swipe was a dislike. */
+		get undoable() {
+			return undoable;
 		},
 		kindOf(productId: string): DecisionKind | undefined {
 			return decisions[productId]?.kind;
 		},
-		decide(product: Product, kind: DecisionKind) {
+		/** `fromSwipe` marks swipe-deck decisions; only those can be undone. */
+		decide(product: Product, kind: DecisionKind, { fromSwipe = false } = {}) {
 			decisions[product.id] =
 				kind === 'like'
 					? { kind, product: $state.snapshot(product), decidedAt: Date.now() }
 					: { kind, decidedAt: Date.now() };
+			undoable = fromSwipe && kind === 'dislike' ? product : null;
 			persist();
+		},
+		/** Reverses the latest swipe dislike, putting that product back on top of the deck. */
+		undo(): Product | null {
+			const product = undoable;
+			if (!product || decisions[product.id]?.kind !== 'dislike') return null;
+			delete decisions[product.id];
+			undoable = null;
+			persist();
+			return product;
 		},
 		/** Forgets every like and dislike, in every market, on this device. */
 		resetAll() {
@@ -95,10 +116,12 @@ export const createDecisionStore = () => {
 				// Storage blocked: clearing the in-memory state below is all we can do.
 			}
 			decisions = {};
+			undoable = null;
 		},
 		/** Puts every disliked product back in the swipe deck. */
 		clearDislikes() {
 			decisions = Object.fromEntries(Object.entries(decisions).filter(([, decision]) => decision.kind === 'like'));
+			undoable = null;
 			persist();
 		}
 	};

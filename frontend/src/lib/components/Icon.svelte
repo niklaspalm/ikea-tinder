@@ -12,7 +12,8 @@
 		| 'moon'
 		| 'monitor'
 		| 'chevron-left'
-		| 'chevron-right';
+		| 'chevron-right'
+		| 'undo';
 </script>
 
 <script lang="ts">
@@ -78,5 +79,8 @@
 		<path d="M15 5l-7 7 7 7" />
 	{:else if name === 'chevron-right'}
 		<path d="M9 5l7 7-7 7" />
+	{:else if name === 'undo'}
+		<path d="M9 14L4 9l5-5" />
+		<path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11" />
 	{/if}
 </svg>

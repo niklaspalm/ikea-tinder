@@ -54,7 +54,8 @@
 	const detailedSample = [...sampleProducts].sort((a, b) => detailScore(b) - detailScore(a))[0] ?? sampleProduct;
 
 	const iconNames: IconName[] = [
-		'close', 'heart', 'flame', 'info', 'info-circle', 'search', 'external', 'star', 'sun', 'moon', 'monitor'
+		'close', 'heart', 'flame', 'info', 'info-circle', 'search', 'external', 'star', 'sun', 'moon', 'monitor',
+		'chevron-left', 'chevron-right', 'undo'
 	];
 	const solidIcons = new Set<IconName>(['heart', 'flame', 'info-circle']);
 

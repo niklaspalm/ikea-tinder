@@ -3,6 +3,7 @@
 </script>
 
 <script lang="ts">
+	import { tick } from 'svelte';
 	import type { Product } from 'ikea-tinder-backend/server';
 	import ProductCard from '$lib/components/product/ProductCard.svelte';
 	import { m } from '$lib/paraglide/messages';
@@ -53,6 +54,32 @@
 				leaving = false;
 			},
 			prefersReducedMotion() ? 0 : FLY_OUT_MS
+		);
+	}
+
+	/**
+	 * Undo: `restore` puts a product back on top of the deck, and the card glides in from
+	 * the left (where disliked cards leave), the reverse of a dislike swipe.
+	 */
+	export async function rewind(restore: () => void) {
+		if (leaving) return;
+		if (prefersReducedMotion()) {
+			restore();
+			return;
+		}
+		leaving = true; // ignore drags and buttons until the card has landed
+		dragging = true; // no transition while the returning card is placed off screen
+		offsetX = -(window.innerWidth + 200);
+		restore();
+		await tick();
+		// Two frames: the returning card must be rendered off screen before it can transition in.
+		requestAnimationFrame(() =>
+			requestAnimationFrame(() => {
+				dragging = false;
+				offsetX = 0;
+				offsetY = 0;
+				setTimeout(() => (leaving = false), FLY_OUT_MS);
+			})
 		);
 	}
 
@@ -122,11 +149,17 @@
 </script>
 
 <!-- Fills the positioned parent; cards stack absolutely inside it. -->
-<div class="absolute inset-0">
+<!--
+	data-swipe-deck turns off page overscroll while the deck is on screen (layout.css), so
+	iOS Safari doesn't rubber-band the whole page along with a swipe.
+-->
+<div class="absolute inset-0" data-swipe-deck>
 	{#each stack as product, depth (product.id)}
 		<div
 			class={[
-				'absolute inset-0 touch-pan-y select-none motion-reduce:transition-none',
+				// touch-action: none: the deck owns the whole gesture. With pan-y, iOS Safari scrolled
+				// (and bounced) the page along with any vertical part of a sideways swipe.
+				'absolute inset-0 touch-none select-none motion-reduce:transition-none',
 				depth === 0 && (dragging ? 'cursor-grabbing' : 'cursor-grab')
 			]}
 			style={cardStyle(depth)}

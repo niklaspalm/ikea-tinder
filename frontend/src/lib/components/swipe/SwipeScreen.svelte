@@ -27,11 +27,22 @@
 	const total = $derived(products?.length ?? 0);
 
 	const onswipe = (product: Product, direction: SwipeDirection) => {
-		decisions.decide(product, direction === 'right' ? 'like' : 'dislike');
+		decisions.decide(product, direction === 'right' ? 'like' : 'dislike', { fromSwipe: true });
 		announcement =
 			direction === 'right'
 				? m.swipe_announce_liked({ name: product.name })
 				: m.swipe_announce_disliked({ name: product.name });
+	};
+
+	/** Brings the latest disliked card back on top; the deck animates it in from the left. */
+	const undo = () => {
+		const restore = () => {
+			const product = decisions.undo();
+			if (product) announcement = m.swipe_announce_undone({ name: product.name });
+		};
+		// When the deck had run out it isn't mounted, so there is nothing to animate.
+		if (deck) deck.rewind(restore);
+		else restore();
 	};
 
 	/** Deciding from the details sheet closes it and plays the same fly-out as a swipe. */
@@ -54,7 +65,21 @@
 	<div class="mb-3 flex items-baseline short:mb-2 justify-between gap-3">
 		<h1 class="text-xl font-bold text-accent">{m.swipe_heading()}</h1>
 		{#if decisions.loaded && products}
-			<p class="text-sm text-ink/75">{m.swipe_progress({ seen: total - remaining.length, total })}</p>
+			<div class="flex items-center gap-3">
+				{#if decisions.undoable}
+					<!-- Only the latest dislike can be undone; a like or an undo hides this again. -->
+					<button
+						type="button"
+						class="flex animate-[pop-in_200ms_ease-out_both] items-center gap-1 self-center rounded-full bg-surface px-3 py-1 text-sm font-bold text-accent shadow-sm ring-1 ring-line-strong transition hover:ring-accent active:scale-95 motion-reduce:animate-none"
+						aria-label={m.swipe_undo_label({ name: decisions.undoable.name })}
+						onclick={undo}
+					>
+						<Icon name="undo" strokeWidth={2.5} class="size-4" />
+						{m.swipe_undo()}
+					</button>
+				{/if}
+				<p class="text-sm text-ink/75">{m.swipe_progress({ seen: total - remaining.length, total })}</p>
+			</div>
 		{/if}
 	</div>
 

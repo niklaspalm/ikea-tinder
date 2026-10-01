@@ -188,5 +188,8 @@
 	"showcase_loading_intro": "Visas medan IKEA svarar. Det lugnande tipset dyker upp efter 5 sekunder.",
 	"product_image_enlarge": "Förstora bild {index} av {count}",
 	"lightbox_zoom_in": "Zooma in",
-	"lightbox_zoom_out": "Zooma ut"
+	"lightbox_zoom_out": "Zooma ut",
+	"swipe_undo": "Ångra",
+	"swipe_undo_label": "Ångra ogillandet av {name}",
+	"swipe_announce_undone": "Tog tillbaka {name}"
 }
