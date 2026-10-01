@@ -3,7 +3,7 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import type { ContentfulStatusCode } from "hono/utils/http-status";
 import { z } from "zod";
-import type { IkeaClient, IkeaError } from "./ikea/client.ts";
+import { PRODUCT_CACHE_TTL_MS, type IkeaClient, type IkeaError } from "./ikea/client.ts";
 import type { Product } from "./ikea/product.ts";
 import type { ImageStore } from "./images.ts";
 import { isSupportedMarket, listMarkets, type Market } from "./markets.ts";
@@ -80,7 +80,7 @@ export const createApp = ({ ikea, images, corsOrigin = "*" }: AppDeps) => {
           ...products.flatMap((product) => (product.contextImageUrl ? [product.contextImageUrl] : [])),
         ]);
 
-        c.header("cache-control", "public, max-age=600");
+        c.header("cache-control", `public, max-age=${PRODUCT_CACHE_TTL_MS / 1000}`);
         return c.json({ market: { country, language }, count: products.length, products } satisfies ProductsResponse);
       },
     )

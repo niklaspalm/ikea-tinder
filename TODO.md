@@ -3,6 +3,7 @@
 [x] Create endpoint with all available languages/countries
 [x] Create endpoint that proxies the IKEA latest product request (found in ./Project.md)
 [x] Download images to server if not already available
+[x] Cache responses from IKEA in 30 minutes
 
 Frontend
 [x] The frontend and backend should run on the same port

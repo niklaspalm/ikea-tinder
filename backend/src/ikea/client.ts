@@ -8,6 +8,9 @@ const SEARCH_VERSION = "20250507";
 const PRODUCT_LIMIT = 200;
 const REQUEST_TIMEOUT_MS = 10_000;
 
+/** How long IKEA's product list for a market is reused before asking IKEA again. */
+export const PRODUCT_CACHE_TTL_MS = 30 * 60_000;
+
 export type IkeaError =
   | { kind: "upstream_unreachable"; message: string }
   | { kind: "upstream_status"; status: number }
@@ -43,10 +46,12 @@ const buildSearchBody = () => ({
 
 export const createIkeaClient = ({
   fetch = globalThis.fetch,
-  cacheTtlMs = 10 * 60_000,
+  cacheTtlMs = PRODUCT_CACHE_TTL_MS,
   now = Date.now,
 }: ClientOptions = {}): IkeaClient => {
   const cache = new Map<string, { expiresAt: number; products: Product[] }>();
+  /** Requests to IKEA in progress, so visitors arriving together on a cold cache share one call. */
+  const inFlight = new Map<string, Promise<Result<Product[], IkeaError>>>();
 
   const requestNewProducts = async ({ country, language }: Market): Promise<Result<Product[], IkeaError>> => {
     const url = new URL(`/${country}/${language}/search`, SEARCH_BASE_URL);
@@ -92,9 +97,18 @@ export const createIkeaClient = ({
       const cached = cache.get(key);
       if (cached && cached.expiresAt > now()) return ok(cached.products);
 
-      const result = await requestNewProducts(market);
-      if (result.ok) cache.set(key, { expiresAt: now() + cacheTtlMs, products: result.value });
-      return result;
+      const pending = inFlight.get(key);
+      if (pending) return pending;
+
+      // Only successes are cached: after a failure the next visitor tries IKEA again.
+      const request = requestNewProducts(market)
+        .then((result) => {
+          if (result.ok) cache.set(key, { expiresAt: now() + cacheTtlMs, products: result.value });
+          return result;
+        })
+        .finally(() => inFlight.delete(key));
+      inFlight.set(key, request);
+      return request;
     },
   };
 };

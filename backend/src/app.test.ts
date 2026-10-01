@@ -3,7 +3,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { createApp } from "./app.ts";
-import { createIkeaClient } from "./ikea/client.ts";
+import { createIkeaClient, PRODUCT_CACHE_TTL_MS } from "./ikea/client.ts";
 import { createImageStore } from "./images.ts";
 
 const MAIN_IMAGE_URL = "https://www.ikea.com/se/sv/images/products/konstrunda-pall-furu__1479802_pe1000090_s5.jpg";
@@ -214,6 +214,69 @@ describe("GET /api/markets/:country/:language/products", () => {
     });
     const res = await app.request("/api/markets/se/sv/products");
     expect(res.status).toBe(504);
+  });
+});
+
+describe("IKEA product cache", () => {
+  const SE = { country: "se", language: "sv" } as const;
+  const MINUTE = 60_000;
+
+  const clientWithClock = (respond: () => Response | Promise<Response>) => {
+    let time = 0;
+    const fetch = vi.fn<typeof globalThis.fetch>(async () => respond());
+    const client = createIkeaClient({ fetch, now: () => time });
+    return { client, fetch, advance: (ms: number) => (time += ms) };
+  };
+
+  it("keeps IKEA responses for 30 minutes", () => {
+    expect(PRODUCT_CACHE_TTL_MS).toBe(30 * MINUTE);
+  });
+
+  it("reuses a response until the 30 minutes are up, then asks IKEA again", async () => {
+    const { client, fetch, advance } = clientWithClock(() => productsResponse(upstreamProduct));
+
+    await client.fetchNewProducts(SE);
+    advance(30 * MINUTE - 1);
+    await client.fetchNewProducts(SE);
+    expect(fetch).toHaveBeenCalledTimes(1);
+
+    advance(1);
+    await client.fetchNewProducts(SE);
+    expect(fetch).toHaveBeenCalledTimes(2);
+  });
+
+  it("caches each market separately", async () => {
+    const { client, fetch } = clientWithClock(() => productsResponse(upstreamProduct));
+    await client.fetchNewProducts(SE);
+    await client.fetchNewProducts({ country: "de", language: "de" });
+    await client.fetchNewProducts(SE);
+    expect(fetch).toHaveBeenCalledTimes(2);
+  });
+
+  it("shares one IKEA call between visitors arriving at the same time", async () => {
+    const { client, fetch } = clientWithClock(
+      () => new Promise<Response>((resolve) => setTimeout(() => resolve(productsResponse(upstreamProduct)), 20)),
+    );
+    const results = await Promise.all([1, 2, 3].map(() => client.fetchNewProducts(SE)));
+    expect(fetch).toHaveBeenCalledTimes(1);
+    expect(results.every((result) => result.ok && result.value.length === 1)).toBe(true);
+  });
+
+  it("does not cache failures, so the next visitor retries IKEA", async () => {
+    let fail = true;
+    const { client, fetch } = clientWithClock(() =>
+      fail ? new Response("busy", { status: 503 }) : productsResponse(upstreamProduct),
+    );
+    expect((await client.fetchNewProducts(SE)).ok).toBe(false);
+    fail = false;
+    expect((await client.fetchNewProducts(SE)).ok).toBe(true);
+    expect(fetch).toHaveBeenCalledTimes(2);
+  });
+
+  it("tells HTTP clients to cache products for the same 30 minutes", async () => {
+    const { app } = await appWithUpstream(() => productsResponse(upstreamProduct));
+    const res = await app.request("/api/markets/se/sv/products");
+    expect(res.headers.get("cache-control")).toBe("public, max-age=1800");
   });
 });
 
