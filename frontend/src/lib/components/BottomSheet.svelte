@@ -65,10 +65,14 @@
 		motion-reduce:animate-none motion-reduce:backdrop:animate-none"
 >
 	{#if open || closing}
-		<div class="mb-3 flex justify-end">
+		<!--
+			Zero-height sticky row: the close button floats over the top-right corner of the
+			content (and stays there while scrolling) without pushing anything down.
+		-->
+		<div class="sticky top-0 z-10 flex h-0 justify-end">
 			<button
 				type="button"
-				class="grid size-10 place-items-center rounded-full bg-surface text-ink/75 shadow-sm ring-1 ring-line transition hover:text-accent"
+				class="mt-2 mr-2 grid size-10 place-items-center rounded-full bg-surface/90 text-ink/80 shadow-md ring-1 ring-line backdrop-blur transition hover:text-accent"
 				aria-label={m.dialog_close()}
 				onclick={animateClose}
 			>

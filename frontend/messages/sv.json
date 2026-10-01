@@ -185,5 +185,8 @@
 	"product_image_position": "Bild {index} av {count}",
 	"swipe_loading_slow": "IKEA tar lite tid på sig att svara. Häng kvar!",
 	"showcase_loading_heading": "Laddningsskärm",
-	"showcase_loading_intro": "Visas medan IKEA svarar. Det lugnande tipset dyker upp efter 5 sekunder."
+	"showcase_loading_intro": "Visas medan IKEA svarar. Det lugnande tipset dyker upp efter 5 sekunder.",
+	"product_image_enlarge": "Förstora bild {index} av {count}",
+	"lightbox_zoom_in": "Zooma in",
+	"lightbox_zoom_out": "Zooma ut"
 }

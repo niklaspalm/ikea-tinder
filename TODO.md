@@ -47,3 +47,5 @@ Frontend
 [x] Create nice transitions when switching between "Swipe", "Matches" and "About"
 [x] Also add nice animations when showing and hiding product preview cards
 [x] Create a loading screen when the api is slow to respond
+[x] Product preview UI - The close button could be placed in a better position, right now it is pushing down content
+[x] In product preview mode, it would be nice to be able to click the product images and make them bigger, zoomable maybe

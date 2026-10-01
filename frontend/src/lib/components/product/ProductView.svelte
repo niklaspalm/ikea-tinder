@@ -3,6 +3,7 @@
 	import Icon from '$lib/components/Icon.svelte';
 	import { m } from '$lib/paraglide/messages';
 	import { formatArticleNumber } from '$lib/product';
+	import ImageLightbox from './ImageLightbox.svelte';
 	import ProductImage from './ProductImage.svelte';
 	import ProductPrice from './ProductPrice.svelte';
 	import ProductRating from './ProductRating.svelte';
@@ -22,6 +23,12 @@
 
 	let { product, isMatch = false, onlike, ondislike }: Props = $props();
 
+	const gallery = $derived(
+		product.images.length > 0 ? product.images : [{ url: product.imageUrl, alt: product.imageAlt }]
+	);
+	/** Index of the image shown in the full-screen viewer, or null while it's closed. */
+	let lightboxAt = $state<number | null>(null);
+
 	const ACTION = 'flex h-12 flex-1 items-center justify-center gap-2 rounded-full font-bold transition active:scale-[0.98]';
 	const SECONDARY = `${ACTION} bg-surface text-accent ring-2 ring-line-strong hover:ring-accent`;
 
@@ -31,7 +38,7 @@
 
 <ProductSheet>
 	{#snippet media()}
-		{#if product.images.length > 1}
+		{#if gallery.length > 1}
 			<!-- svelte-ignore a11y_no_noninteractive_tabindex: scrollable regions must be keyboard reachable (WCAG 2.1.1) -->
 			<div
 				role="region"
@@ -39,18 +46,34 @@
 				tabindex="0"
 				class="flex snap-x snap-mandatory gap-3 overflow-x-auto scroll-smooth p-4 outline-offset-[-4px] [scrollbar-width:thin]"
 			>
-				{#each product.images as image, index (image.url)}
-					<ProductImage
-						src={image.url}
-						alt={image.alt}
-						class="aspect-square w-[85%] shrink-0 snap-center rounded-2xl ring-1 ring-line"
-						loading={index === 0 ? 'eager' : 'lazy'}
-					/>
+				{#each gallery as image, index (image.url)}
+					<button
+						type="button"
+						class="aspect-square w-[85%] shrink-0 cursor-zoom-in snap-center overflow-hidden rounded-2xl ring-1 ring-line"
+						aria-label={m.product_image_enlarge({ index: index + 1, count: gallery.length })}
+						onclick={() => (lightboxAt = index)}
+					>
+						<ProductImage src={image.url} alt={image.alt} class="size-full" loading={index === 0 ? 'eager' : 'lazy'} />
+					</button>
 				{/each}
 			</div>
 		{:else}
-			<ProductImage src={product.imageUrl} alt={product.imageAlt} class="aspect-square w-full p-6" />
+			<button
+				type="button"
+				class="aspect-square w-full cursor-zoom-in p-6"
+				aria-label={m.product_image_enlarge({ index: 1, count: 1 })}
+				onclick={() => (lightboxAt = 0)}
+			>
+				<ProductImage src={product.imageUrl} alt={product.imageAlt} class="size-full" />
+			</button>
 		{/if}
+
+		<ImageLightbox
+			images={gallery}
+			openAt={lightboxAt}
+			label={m.product_images_label({ name: product.name })}
+			onclose={() => (lightboxAt = null)}
+		/>
 	{/snippet}
 
 	<header>

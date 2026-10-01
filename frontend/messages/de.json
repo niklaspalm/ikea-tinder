@@ -185,5 +185,8 @@
 	"product_image_position": "Bild {index} von {count}",
 	"swipe_loading_slow": "IKEA braucht gerade etwas länger. Einen Moment noch!",
 	"showcase_loading_heading": "Ladebildschirm",
-	"showcase_loading_intro": "Wird angezeigt, während IKEA antwortet. Der beruhigende Hinweis erscheint nach 5 Sekunden."
+	"showcase_loading_intro": "Wird angezeigt, während IKEA antwortet. Der beruhigende Hinweis erscheint nach 5 Sekunden.",
+	"product_image_enlarge": "Bild {index} von {count} vergrößern",
+	"lightbox_zoom_in": "Vergrößern",
+	"lightbox_zoom_out": "Verkleinern"
 }

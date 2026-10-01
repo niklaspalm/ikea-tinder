@@ -185,5 +185,8 @@
 	"product_image_position": "Billede {index} af {count}",
 	"swipe_loading_slow": "IKEA er lidt længe om at svare. Bliv hængende!",
 	"showcase_loading_heading": "Indlæsningsskærm",
-	"showcase_loading_intro": "Vises, mens IKEA svarer. Den beroligende besked dukker op efter 5 sekunder."
+	"showcase_loading_intro": "Vises, mens IKEA svarer. Den beroligende besked dukker op efter 5 sekunder.",
+	"product_image_enlarge": "Forstør billede {index} af {count}",
+	"lightbox_zoom_in": "Zoom ind",
+	"lightbox_zoom_out": "Zoom ud"
 }
