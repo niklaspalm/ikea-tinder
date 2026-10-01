@@ -182,5 +182,8 @@
 	"about_language_heading": "Language",
 	"product_image_previous": "Previous image",
 	"product_image_next": "Next image",
-	"product_image_position": "Image {index} of {count}"
+	"product_image_position": "Image {index} of {count}",
+	"swipe_loading_slow": "IKEA is taking a while to answer. Hang tight!",
+	"showcase_loading_heading": "Loading screen",
+	"showcase_loading_intro": "Shown while IKEA answers. The reassuring hint appears after 5 seconds."
 }

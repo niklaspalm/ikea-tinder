@@ -182,5 +182,8 @@
 	"about_language_heading": "Sprache",
 	"product_image_previous": "Vorheriges Bild",
 	"product_image_next": "Nächstes Bild",
-	"product_image_position": "Bild {index} von {count}"
+	"product_image_position": "Bild {index} von {count}",
+	"swipe_loading_slow": "IKEA braucht gerade etwas länger. Einen Moment noch!",
+	"showcase_loading_heading": "Ladebildschirm",
+	"showcase_loading_intro": "Wird angezeigt, während IKEA antwortet. Der beruhigende Hinweis erscheint nach 5 Sekunden."
 }

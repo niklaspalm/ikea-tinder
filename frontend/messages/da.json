@@ -182,5 +182,8 @@
 	"about_language_heading": "Sprog",
 	"product_image_previous": "Forrige billede",
 	"product_image_next": "Næste billede",
-	"product_image_position": "Billede {index} af {count}"
+	"product_image_position": "Billede {index} af {count}",
+	"swipe_loading_slow": "IKEA er lidt længe om at svare. Bliv hængende!",
+	"showcase_loading_heading": "Indlæsningsskærm",
+	"showcase_loading_intro": "Vises, mens IKEA svarer. Den beroligende besked dukker op efter 5 sekunder."
 }

@@ -182,5 +182,8 @@
 	"about_language_heading": "Språk",
 	"product_image_previous": "Föregående bild",
 	"product_image_next": "Nästa bild",
-	"product_image_position": "Bild {index} av {count}"
+	"product_image_position": "Bild {index} av {count}",
+	"swipe_loading_slow": "IKEA tar lite tid på sig att svara. Häng kvar!",
+	"showcase_loading_heading": "Laddningsskärm",
+	"showcase_loading_intro": "Visas medan IKEA svarar. Det lugnande tipset dyker upp efter 5 sekunder."
 }

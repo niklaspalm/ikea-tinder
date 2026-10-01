@@ -12,34 +12,65 @@
 
 	let { open, label, onclose, children }: Props = $props();
 
+	/** Keep in sync with the sheet-down/backdrop-out durations below. */
+	const CLOSE_MS = 200;
+
 	let dialog: HTMLDialogElement;
+	let closing = $state(false);
+
+	/**
+	 * A <dialog> closes instantly, so every close path (button, backdrop, Escape, parent)
+	 * runs through here: play the slide-down first, then really close.
+	 */
+	const animateClose = () => {
+		if (closing || !dialog.open) return;
+		closing = true;
+		const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		setTimeout(
+			() => {
+				dialog.close();
+				closing = false;
+			},
+			reduced ? 0 : CLOSE_MS
+		);
+	};
 
 	// A modal <dialog> gives focus trapping, Escape to close and an inert background for free.
 	$effect(() => {
 		if (open && !dialog.open) dialog.showModal();
-		if (!open && dialog.open) dialog.close();
+		if (!open && dialog.open) animateClose();
 	});
 </script>
 
 <dialog
 	bind:this={dialog}
 	aria-label={label}
+	data-closing={closing || undefined}
 	{onclose}
+	oncancel={(event) => {
+		// Escape: animate out instead of the browser's instant close.
+		event.preventDefault();
+		animateClose();
+	}}
 	onclick={(event) => {
 		// A click on the dialog element itself (not its content) is a click on the backdrop.
-		if (event.target === dialog) dialog.close();
+		if (event.target === dialog) animateClose();
 	}}
 	class="mx-auto mt-auto mb-0 max-h-[92dvh] w-full max-w-md overflow-y-auto overscroll-contain rounded-t-3xl bg-canvas p-4
-		pb-[calc(1rem+env(safe-area-inset-bottom))] text-ink backdrop:bg-black/60 open:animate-[sheet-up_200ms_ease-out]
-		motion-reduce:open:animate-none"
+		pb-[calc(1rem+env(safe-area-inset-bottom))] text-ink backdrop:bg-black/60
+		open:not-data-closing:animate-[sheet-up_250ms_cubic-bezier(0.2,0.9,0.3,1)]
+		open:not-data-closing:backdrop:animate-[backdrop-in_250ms_ease-out]
+		data-closing:animate-[sheet-down_200ms_ease-in_forwards]
+		data-closing:backdrop:animate-[backdrop-out_200ms_ease-in_forwards]
+		motion-reduce:animate-none motion-reduce:backdrop:animate-none"
 >
-	{#if open}
+	{#if open || closing}
 		<div class="mb-3 flex justify-end">
 			<button
 				type="button"
 				class="grid size-10 place-items-center rounded-full bg-surface text-ink/75 shadow-sm ring-1 ring-line transition hover:text-accent"
 				aria-label={m.dialog_close()}
-				onclick={() => dialog.close()}
+				onclick={animateClose}
 			>
 				<Icon name="close" strokeWidth={2.5} class="size-5" />
 			</button>

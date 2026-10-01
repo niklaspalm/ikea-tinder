@@ -113,7 +113,8 @@
 		const lift = depth === 1 ? 14 * (1 - dragProgress) : 28;
 		return [
 			`transform: translateY(${lift}px) scale(${scale})`,
-			`transition: ${dragging ? 'none' : `transform ${FLY_OUT_MS}ms ease-out`}`,
+			// Opacity too: the card coming up from the back fades in instead of popping.
+			`transition: ${dragging ? 'none' : `transform ${FLY_OUT_MS}ms ease-out, opacity ${FLY_OUT_MS}ms ease-out`}`,
 			`z-index: ${3 - depth}`,
 			depth === 2 ? 'opacity: 0' : ''
 		].join(';');
@@ -137,13 +138,16 @@
 			onpointerup={depth === 0 ? onpointerup : undefined}
 			onpointercancel={depth === 0 ? reset : undefined}
 		>
-			<ProductCard
-				{product}
-				fill
-				onlike={() => swipe('right')}
-				ondislike={() => swipe('left')}
-				onmoreinfo={onmoreinfo}
-			/>
+			<!-- Inner wrapper: the outer one carries the drag transform, so the entrance animates here. -->
+			<div class="h-full animate-[pop-in_350ms_ease-out_both] motion-reduce:animate-none">
+				<ProductCard
+					{product}
+					fill
+					onlike={() => swipe('right')}
+					ondislike={() => swipe('left')}
+					{onmoreinfo}
+				/>
+			</div>
 
 			{#if depth === 0}
 				<!-- Tinder-style stamps that fade in with the drag direction. -->

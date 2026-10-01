@@ -7,6 +7,7 @@
 	import { getDecisionStore } from '$lib/decisions.svelte';
 	import { m } from '$lib/paraglide/messages';
 	import SwipeDeck, { type SwipeDirection } from './SwipeDeck.svelte';
+	import SwipeLoading from './SwipeLoading.svelte';
 
 	type Props = { products: Product[] | null; loadFailed: boolean };
 
@@ -61,7 +62,7 @@
 	<p class="sr-only" aria-live="polite">{announcement}</p>
 
 	{#if loadFailed}
-		<section class="my-auto rounded-3xl bg-surface p-6 text-center shadow-sm ring-1 ring-line">
+		<section class="my-auto animate-[pop-in_350ms_ease-out_both] rounded-3xl bg-surface p-6 text-center shadow-sm ring-1 ring-line motion-reduce:animate-none">
 			<h2 class="text-lg font-bold">{m.swipe_error_heading()}</h2>
 			<p class="mt-1 text-ink/75">{m.swipe_error_body()}</p>
 			<button
@@ -74,10 +75,7 @@
 			</button>
 		</section>
 	{:else if !decisions.loaded || !products}
-		<div class="relative min-h-[28rem] flex-1 short:min-h-[19rem]" aria-busy="true">
-			<div class="absolute inset-0 animate-pulse rounded-3xl bg-surface ring-1 ring-line motion-reduce:animate-none"></div>
-			<p class="sr-only">{m.swipe_loading()}</p>
-		</div>
+		<SwipeLoading />
 	{:else if remaining.length > 0}
 		<div class="relative min-h-[28rem] flex-1 short:min-h-[19rem]">
 			<SwipeDeck
@@ -88,7 +86,7 @@
 			/>
 		</div>
 	{:else}
-		<section class="my-auto rounded-3xl bg-surface p-6 text-center shadow-sm ring-1 ring-line">
+		<section class="my-auto animate-[pop-in_350ms_ease-out_both] rounded-3xl bg-surface p-6 text-center shadow-sm ring-1 ring-line motion-reduce:animate-none">
 			<Icon name="heart" solid class="mx-auto size-12 text-ikea-yellow" />
 			<h2 class="mt-3 text-xl font-bold">{m.swipe_done_heading()}</h2>
 			<p class="mt-1 text-ink/75">{m.swipe_done_body({ count: total })}</p>

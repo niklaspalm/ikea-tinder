@@ -8,6 +8,7 @@
 	import Icon, { type IconName } from '$lib/components/Icon.svelte';
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 	import SwipeDeck from '$lib/components/swipe/SwipeDeck.svelte';
+	import SwipeLoading from '$lib/components/swipe/SwipeLoading.svelte';
 	import CountrySelector from '$lib/components/markets/CountrySelector.svelte';
 	import { marketKey, type SelectableMarket } from '$lib/markets';
 	import BottomNav, { type NavItem } from '$lib/components/nav/BottomNav.svelte';
@@ -294,5 +295,13 @@
 				</div>
 			</div>
 		{/if}
+	</div>
+</section>
+
+<section class="mt-10" aria-labelledby="loading-heading">
+	<h2 id="loading-heading" class="text-lg font-bold">{m.showcase_loading_heading()}</h2>
+	<p class="mt-1 text-sm">{m.showcase_loading_intro()}</p>
+	<div class="mt-4 flex h-[30rem] flex-col">
+		<SwipeLoading />
 	</div>
 </section>

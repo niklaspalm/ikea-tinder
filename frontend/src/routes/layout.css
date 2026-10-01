@@ -116,3 +116,100 @@
 		transform: translateY(100%);
 	}
 }
+
+/* Entrance and exit animations used across the app. */
+@keyframes fade-in {
+	from {
+		opacity: 0;
+	}
+}
+@keyframes pop-in {
+	from {
+		opacity: 0;
+		transform: translateY(8px) scale(0.96);
+	}
+}
+@keyframes flame-pulse {
+	50% {
+		opacity: 0.7;
+		transform: scale(1.12);
+	}
+}
+@keyframes sheet-down {
+	to {
+		transform: translateY(100%);
+	}
+}
+@keyframes backdrop-in {
+	from {
+		opacity: 0;
+	}
+}
+@keyframes backdrop-out {
+	to {
+		opacity: 0;
+	}
+}
+
+/*
+ * Page transitions between Swipe, Matches and About (View Transitions API, started in
+ * +layout.svelte). Only the page content moves, sliding in the direction of the nav
+ * order; header and bottom nav are separate snapshots that stay put. Browsers without
+ * the API just switch pages instantly.
+ */
+@keyframes page-out-left {
+	to {
+		opacity: 0;
+		transform: translateX(-2rem);
+	}
+}
+@keyframes page-in-right {
+	from {
+		opacity: 0;
+		transform: translateX(2rem);
+	}
+}
+@keyframes page-out-right {
+	to {
+		opacity: 0;
+		transform: translateX(2rem);
+	}
+}
+@keyframes page-in-left {
+	from {
+		opacity: 0;
+		transform: translateX(-2rem);
+	}
+}
+
+::view-transition-old(page) {
+	animation: 160ms ease-in both page-out-left;
+}
+::view-transition-new(page) {
+	animation: 260ms cubic-bezier(0.2, 0.9, 0.3, 1) both page-in-right;
+}
+:root[data-nav-direction='back']::view-transition-old(page) {
+	animation-name: page-out-right;
+}
+:root[data-nav-direction='back']::view-transition-new(page) {
+	animation-name: page-in-left;
+}
+/* Header and nav switch state instantly instead of cross-fading. */
+::view-transition-group(site-header),
+::view-transition-group(bottom-nav),
+::view-transition-new(site-header),
+::view-transition-new(bottom-nav) {
+	animation: none;
+}
+::view-transition-old(site-header),
+::view-transition-old(bottom-nav) {
+	display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	::view-transition-group(*),
+	::view-transition-old(*),
+	::view-transition-new(*) {
+		animation: none !important;
+	}
+}

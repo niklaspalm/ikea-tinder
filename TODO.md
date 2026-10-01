@@ -44,3 +44,6 @@ Frontend
 [x] On the product card, we want to be able to see more images, I want a click on the right side of the image to see the next image, and left side for previous image, previous click is disabled if it is the first image and next if it is the last image.
 [x] Create pills underneath image to indicate which image you're viewing and if there are more images
 [x] Decrease button sizes for dislike, info and like on the product card a but on smaller devices like the iphone SE
+[x] Create nice transitions when switching between "Swipe", "Matches" and "About"
+[x] Also add nice animations when showing and hiding product preview cards
+[x] Create a loading screen when the api is slow to respond

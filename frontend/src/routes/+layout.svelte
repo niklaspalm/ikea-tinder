@@ -1,19 +1,41 @@
 <script lang="ts">
 	import type { Pathname } from '$app/types';
 	import { resolve } from '$app/paths';
+	import { onNavigate } from '$app/navigation';
 	import { page } from '$app/state';
 	import { locales, localizeHref } from '$lib/paraglide/runtime';
 	import '@fontsource-variable/noto-sans';
 	import './layout.css';
 	import logo from '$lib/assets/logo.svg';
 	import CountryFlag from '$lib/components/markets/CountryFlag.svelte';
-	import BottomNav from '$lib/components/nav/BottomNav.svelte';
+	import BottomNav, { isActiveHref } from '$lib/components/nav/BottomNav.svelte';
 	import { createDecisionStore, setDecisionStore } from '$lib/decisions.svelte';
 	import { countryName, marketKey } from '$lib/markets';
 	import { mainNavItems } from '$lib/navigation';
 	import { m } from '$lib/paraglide/messages';
 
 	let { data, children } = $props();
+
+	/** Position in the bottom nav, so page transitions slide the way the user moves. */
+	const navIndex = (path: string) => mainNavItems().findIndex((item) => isActiveHref(item.href, path));
+
+	// Page transitions via the View Transitions API; browsers without it switch instantly.
+	onNavigate((navigation) => {
+		const from = navigation.from?.url.pathname;
+		const to = navigation.to?.url.pathname;
+		if (!document.startViewTransition || !from || !to || from === to) return;
+
+		const root = document.documentElement;
+		root.dataset.navDirection = navIndex(to) < navIndex(from) ? 'back' : 'forward';
+
+		return new Promise((resolve) => {
+			const transition = document.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+			transition.finished.finally(() => delete root.dataset.navDirection);
+		});
+	});
 
 	const decisions = createDecisionStore();
 	setDecisionStore(decisions);
@@ -30,7 +52,7 @@
 </svelte:head>
 
 <div class="flex min-h-dvh flex-col">
-	<header class="sticky top-0 z-20 bg-ikea-blue text-white">
+	<header class="sticky top-0 z-20 bg-ikea-blue text-white [view-transition-name:site-header]">
 		<div class="mx-auto flex h-(--header-height) max-w-md items-center gap-3 px-4">
 			<a href="/" class="flex items-center gap-3 rounded-lg">
 				<img src={logo} alt="" class="size-9" />
@@ -52,11 +74,11 @@
 		</div>
 	</header>
 
-	<main class="mx-auto flex w-full max-w-md flex-1 flex-col px-4 py-4 short:py-2">
+	<main class="mx-auto flex w-full max-w-md flex-1 flex-col px-4 py-4 short:py-2 [view-transition-name:page]">
 		{@render children()}
 	</main>
 
-	<div class="sticky bottom-0 z-10">
+	<div class="sticky bottom-0 z-10 [view-transition-name:bottom-nav]">
 		<BottomNav items={mainNavItems()} currentPath={page.url.pathname} />
 	</div>
 </div>

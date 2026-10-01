@@ -11,8 +11,13 @@
 	<title>{m.page_title({ page: data.market ? m.swipe_page_title() : m.home_page_title() })}</title>
 </svelte:head>
 
-{#if data.market}
-	<SwipeScreen products={data.products} loadFailed={data.loadFailed} />
+{#if data.deck}
+	<!-- The deck streams in: the page shows a loading screen until IKEA answers. -->
+	{#await data.deck}
+		<SwipeScreen products={null} loadFailed={false} />
+	{:then deck}
+		<SwipeScreen products={deck.products} loadFailed={deck.failed} />
+	{/await}
 {:else}
 	<section class="rounded-3xl bg-surface p-6 shadow-sm ring-1 ring-line">
 		<h1 class="text-2xl font-bold text-accent">{m.home_heading()}</h1>
