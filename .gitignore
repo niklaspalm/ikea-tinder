@@ -141,3 +141,6 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# Runtime image cache (downloaded IKEA product photos, re-fetched on demand)
+data/

@@ -1,0 +1,16 @@
+{
+  "name": "ikea-tinder",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w frontend",
+    "build": "npm run build -w frontend",
+    "start": "npm run start -w frontend",
+    "check": "npm run typecheck -w backend && npm run check -w frontend",
+    "test": "npm test --workspaces"
+  }
+}
