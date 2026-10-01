@@ -9,7 +9,7 @@
 		"preview": "vite preview",
 		"start": "node start.js",
 		"fixtures": "tsx scripts/generate-product-fixture.ts",
-		"test": "vitest run",
+		"test": "node ../scripts/run-vitest.mjs",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "paraglide-js compile --project ./project.inlang --outdir ./src/lib/paraglide --strategy cookie preferredLanguage baseLocale && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
