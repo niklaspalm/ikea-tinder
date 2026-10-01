@@ -1,0 +1,183 @@
+{
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"page_title": "{page} · IKEA Tinder",
+	"home_page_title": "Swipe gennem IKEAs nyheder",
+	"home_heading": "Hej!",
+	"home_intro": "Swipe gennem IKEAs nyeste produkter. Vælg dit land for at komme i gang.",
+	"product_card_label": "{name}, {description}",
+	"product_description": "{typeName}, {designText}",
+	"product_price_unavailable": "Pris ikke tilgængelig",
+	"product_like": "Synes godt om {name}",
+	"product_dislike": "Synes ikke om {name}",
+	"product_more_info": "Mere info om {name}",
+	"product_view_on_ikea": "Se på IKEA.com",
+	"product_opens_new_tab": "(åbner i en ny fane)",
+	"product_images_label": "Billeder af {name}",
+	"product_rating": "Bedømt {rating} ud af 5",
+	"product_review_count": [
+		{
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
+			"match": {
+				"countPlural=one": "{count} anmeldelse",
+				"countPlural=other": "{count} anmeldelser"
+			}
+		}
+	],
+	"product_details_heading": "Detaljer",
+	"product_article_number": "Varenummer",
+	"product_size": "Størrelse",
+	"product_colors": "Farver",
+	"product_category": "Kategori",
+	"product_variants": "Varianter",
+	"product_variant_count": [
+		{
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
+			"match": {
+				"countPlural=one": "Fås i {count} variant",
+				"countPlural=other": "Fås i {count} varianter"
+			}
+		}
+	],
+	"match_view_on_ikea": "Se {name} på IKEA.com (åbner i en ny fane)",
+	"match_remove": "Fjern {name} fra dine matches",
+	"match_search_label": "Søg i dine matches",
+	"match_search_placeholder": "Søg på navn eller type",
+	"match_search_clear": "Ryd søgningen",
+	"match_search_results": [
+		{
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
+			"match": {
+				"countPlural=one": "{count} match",
+				"countPlural=other": "{count} matches"
+			}
+		}
+	],
+	"match_search_no_results": "Ingen matches for “{query}”",
+	"nav_label": "Hovedmenu",
+	"nav_swipe": "Swipe",
+	"nav_matches": "Matches",
+	"nav_about": "Om",
+	"country_selector_label": "Vælg dit land",
+	"theme_label": "Tema",
+	"theme_system": "System",
+	"theme_light": "Lyst",
+	"theme_dark": "Mørkt",
+	"showcase_page_title": "Komponenter",
+	"showcase_heading": "Komponentkatalog",
+	"showcase_intro": "Alle byggeklodser i brugerfladen hver for sig, med eksempeldata.",
+	"showcase_colors_heading": "Farver",
+	"showcase_brand_colors": "Brandpalet (ens i begge temaer)",
+	"showcase_theme_tokens": "Tematokens (skifter med temaet)",
+	"showcase_product_card_heading": "Produktkort",
+	"showcase_product_card_intro": "Eksempeldataene er et tilfældigt produkt fra et rigtigt produktsvar.",
+	"showcase_regenerate_label": "Vælg et andet produkt:",
+	"showcase_action_prompt": "Tryk på en knap på et kort",
+	"showcase_action_liked": "Synes godt om: {name}",
+	"showcase_action_disliked": "Synes ikke om: {name}",
+	"showcase_action_more_info": "Mere info: {name}",
+	"showcase_variant_default": "Standard",
+	"showcase_variant_edge_case": "Langt navn, ingen pris",
+	"showcase_nav_heading": "Bundnavigation",
+	"showcase_nav_intro": "Hver række viser Matches i én bestemt tilstand.",
+	"showcase_state_normal": "Normal",
+	"showcase_state_hover": "Hover / fokus",
+	"showcase_state_active": "Aktiv",
+	"showcase_state_pressed": "Trykket",
+	"showcase_matches_heading": "Matchliste",
+	"showcase_matches_intro": "Skriv for at filtrere; fjern tager et match ud af listen.",
+	"showcase_matches_reset": "Nulstil listen",
+	"showcase_icons_heading": "Ikoner",
+	"showcase_icons_intro": "Konturer som standard; hjerte, flamme og info-cirkel findes også udfyldt.",
+	"showcase_blocks_heading": "Produktbyggeklodser",
+	"showcase_blocks_intro": "Deles af produktkortet, produktvisningen og matchlisten.",
+	"showcase_block_title": "Titel",
+	"showcase_block_price": "Pris",
+	"showcase_block_rating": "Bedømmelse",
+	"showcase_price_regular": "Normalpris",
+	"showcase_price_reduced": "Nedsat",
+	"showcase_price_unavailable": "Ikke tilgængelig",
+	"showcase_country_heading": "Landevælger",
+	"showcase_country_selected": "Valgt marked: {market}",
+	"showcase_country_none": "Intet land valgt endnu",
+	"showcase_product_view_heading": "Produktvisning",
+	"showcase_product_view_intro": "Alt bag “Mere info”, vist med det mest detaljerede eksempelprodukt.",
+	"home_start": "Begynd at swipe",
+	"swipe_page_title": "Swipe",
+	"swipe_heading": "Nyt hos IKEA",
+	"swipe_progress": "{seen} af {total} set",
+	"swipe_loading": "Indlæser produkter…",
+	"swipe_stamp_like": "JA TAK",
+	"swipe_stamp_nope": "NEJ TAK",
+	"swipe_announce_liked": "Synes godt om {name}",
+	"swipe_announce_disliked": "Sprang {name} over",
+	"swipe_done_heading": "Det var alt for nu!",
+	"swipe_done_body": [
+		{
+			"declarations": [
+				"input count",
+				"local countPlural = count: plural"
+			],
+			"selectors": [
+				"countPlural"
+			],
+			"match": {
+				"countPlural=one": "Du har set det {count} nyeste produkt.",
+				"countPlural=other": "Du har set alle {count} nyeste produkter."
+			}
+		}
+	],
+	"swipe_done_matches": "Se dine matches",
+	"swipe_done_restart": "Vis fravalgte produkter igen",
+	"swipe_error_heading": "Kunne ikke få forbindelse til IKEA",
+	"swipe_error_body": "Produkterne kunne ikke indlæses lige nu.",
+	"swipe_retry": "Prøv igen",
+	"swipe_details_label": "Detaljer om {name}",
+	"product_in_matches": "Blandt dine matches",
+	"product_action_like": "Synes godt om",
+	"product_action_dislike": "Synes ikke om",
+	"product_action_unmatch": "Fjern fra matches",
+	"match_view_details": "Vis detaljer om {name}",
+	"matches_page_title": "Matches",
+	"matches_heading": "Dine matches",
+	"matches_empty": "Ingen matches endnu. Swipe til højre på noget, du elsker!",
+	"matches_empty_cta": "Begynd at swipe",
+	"about_page_title": "Om",
+	"about_heading": "Om IKEA Tinder",
+	"about_body": "Swipe gennem IKEAs 200 nyeste produkter: til højre for at synes godt om, til venstre for at springe over. Dine valg gemmes kun på denne enhed.",
+	"about_disclaimer": "Et hobbyprojekt uden tilknytning til IKEA. Produktdata og billeder kommer fra IKEA.",
+	"about_settings_heading": "Indstillinger",
+	"about_theme_heading": "Udseende",
+	"about_country_save": "Skift land",
+	"header_change_country": "Land: {country}. Skift land",
+	"dialog_close": "Luk",
+	"showcase_deck_heading": "Swipebunke",
+	"showcase_deck_intro": "Træk et kort eller brug knapperne. Valg her gemmes ikke.",
+	"showcase_deck_empty": "Alle eksempelkort er swipet.",
+	"about_reset_heading": "Dine valg",
+	"about_reset_body": "Start forfra ved at fjerne alt, du har synes godt og ikke godt om på denne enhed, i alle lande.",
+	"about_reset_button": "Nulstil alle valg",
+	"about_reset_confirm": "Fjern alle dine valg? Det kan ikke fortrydes.",
+	"about_reset_confirm_yes": "Ja, nulstil",
+	"about_reset_cancel": "Annuller",
+	"about_reset_done": "Alle dine valg er fjernet.",
+	"language_label": "Sprog",
+	"about_language_heading": "Sprog"
+}
