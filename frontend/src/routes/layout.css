@@ -152,47 +152,60 @@
 }
 
 /*
- * Page transitions between Swipe, Matches and About (View Transitions API, started in
- * +layout.svelte). Only the page content moves, sliding in the direction of the nav
- * order; header and bottom nav are separate snapshots that stay put. Browsers without
- * the API just switch pages instantly.
+ * Carousel page transitions between Swipe, Matches and About (View Transitions API,
+ * started in +layout.svelte). The area between header and bottom nav slides like a
+ * carousel: the old page moves fully out while the new one moves in from the other
+ * edge, side by side, in the direction of the nav order. Header and nav are separate
+ * snapshots that stay put. Browsers without the API just switch pages instantly.
  */
-@keyframes page-out-left {
+@keyframes carousel-out-left {
 	to {
-		opacity: 0;
-		transform: translateX(-2rem);
+		transform: translateX(-100%);
 	}
 }
-@keyframes page-in-right {
+@keyframes carousel-in-from-right {
 	from {
-		opacity: 0;
-		transform: translateX(2rem);
+		transform: translateX(100%);
 	}
 }
-@keyframes page-out-right {
+@keyframes carousel-out-right {
 	to {
-		opacity: 0;
-		transform: translateX(2rem);
+		transform: translateX(100%);
 	}
 }
-@keyframes page-in-left {
+@keyframes carousel-in-from-left {
 	from {
-		opacity: 0;
-		transform: translateX(-2rem);
+		transform: translateX(-100%);
 	}
 }
 
+/* Keep the slide inside the page area instead of crossing the whole window on wide screens. */
+::view-transition-image-pair(page) {
+	overflow: clip;
+}
+::view-transition-group(page) {
+	animation-duration: 380ms;
+	animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* Both pages move together with the same easing, so they stay edge to edge. */
+::view-transition-old(page),
+::view-transition-new(page) {
+	animation-duration: 380ms;
+	animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	animation-fill-mode: both;
+	mix-blend-mode: normal;
+}
 ::view-transition-old(page) {
-	animation: 160ms ease-in both page-out-left;
+	animation-name: carousel-out-left;
 }
 ::view-transition-new(page) {
-	animation: 260ms cubic-bezier(0.2, 0.9, 0.3, 1) both page-in-right;
+	animation-name: carousel-in-from-right;
 }
 :root[data-nav-direction='back']::view-transition-old(page) {
-	animation-name: page-out-right;
+	animation-name: carousel-out-right;
 }
 :root[data-nav-direction='back']::view-transition-new(page) {
-	animation-name: page-in-left;
+	animation-name: carousel-in-from-left;
 }
 /* Header and nav switch state instantly instead of cross-fading. */
 ::view-transition-group(site-header),
