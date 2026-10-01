@@ -45,7 +45,13 @@
 		</a>
 	</section>
 {:else}
-	<MatchSearch bind:value={query} resultCount={visibleMatches.length} />
+	<!--
+		Sticks below the sticky header; the canvas background hides list rows scrolling underneath.
+		z-15 sits above the rows' remove buttons (z-10) and below the header (z-20).
+	-->
+	<div class="sticky top-(--header-height) z-15 -mx-4 bg-canvas px-4 pt-1 pb-2">
+		<MatchSearch bind:value={query} resultCount={visibleMatches.length} />
+	</div>
 
 	{#if visibleMatches.length > 0}
 		<ul class="mt-3 space-y-3">

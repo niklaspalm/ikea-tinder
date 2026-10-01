@@ -26,7 +26,7 @@
 
 <h2 class="mt-8 mb-3 text-lg font-bold">{m.about_settings_heading()}</h2>
 
-<section id="country" class="scroll-mt-4 rounded-3xl bg-surface p-5 shadow-sm ring-1 ring-line">
+<section id="country" class="scroll-mt-[calc(var(--header-height)+1rem)] rounded-3xl bg-surface p-5 shadow-sm ring-1 ring-line">
 	<!-- Posts to the front page's action, which sets the cookie and sends the user to swiping. -->
 	<form method="POST" action="/?/selectMarket" use:enhance>
 		<CountrySelector name="market" value={data.market ?? undefined} required />

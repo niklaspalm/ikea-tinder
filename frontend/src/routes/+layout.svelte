@@ -30,8 +30,8 @@
 </svelte:head>
 
 <div class="flex min-h-dvh flex-col">
-	<header class="bg-ikea-blue text-white">
-		<div class="mx-auto flex max-w-md items-center gap-3 px-4 py-3">
+	<header class="sticky top-0 z-20 bg-ikea-blue text-white">
+		<div class="mx-auto flex h-(--header-height) max-w-md items-center gap-3 px-4">
 			<a href="/" class="flex items-center gap-3 rounded-lg">
 				<img src={logo} alt="" class="size-9" />
 				<!-- Brand wordmark: a proper name, intentionally not translated. -->

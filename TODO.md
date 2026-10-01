@@ -39,3 +39,5 @@ Frontend
 [x] In about, create a reset button that resets all my likes and dislikes
 [x] Instead of sorting by newest like we do now, I want to divide the products into 4 groups, newest 1, 2, 3 and 4. And then randomize inside these groups and the display them so that the user don't always see the same product order. Should still be 200 products though.
 [x] Translate UI labels to danish, swedish and german and make add an option to change language of app as well
+[x] Make header sticky
+[x] On matches page, only scroll matches, keep search sticky in the top
